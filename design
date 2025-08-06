@@ -1,0 +1,16 @@
+module edge_detector (
+    input clk,
+    input signal_in,
+    output reg rising,
+    output reg falling,
+    output reg both
+);
+    reg prev;
+
+    always @(posedge clk) begin
+        rising  <= ~prev & signal_in;
+        falling <= prev & ~signal_in;
+        both    <= prev ^ signal_in;
+        prev    <= signal_in;
+    end
+endmodule
